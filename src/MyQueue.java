@@ -4,13 +4,13 @@ public class MyQueue {
     class Node {
         Object data;
         Node next;
-        public Node(Object data) {
+        public <E> Node(E data) {
             this.data = data;
         }
     }
 
 
-        public void add(Object value){
+        public <E> void add(E value){
             Node node = new Node(value);
             if (size == 0) {
                 start = end = node;

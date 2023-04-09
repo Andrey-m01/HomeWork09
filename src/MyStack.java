@@ -4,12 +4,12 @@ public class MyStack {
     class Node {
         Object data;
         Node previews, next;
-        public Node(Object data) {
+        public <E> Node(E data) {
             this.data = data;
         }
     }
 
-    public void push(Object value){
+    public <E> void push(E value){
         Node node = new Node(value);
         if (size == 0) {
             start = end = node;

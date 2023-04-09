@@ -48,7 +48,7 @@ public class MyLinkedList {
             return size;
         } //возвращает размер коллекции
 
-        public Object get(int index){
+        public <E> Object get(int index){
             Node node = start;
             if (index < size & index > -1) {
                 for (int i = 0; i < index; i++) {
