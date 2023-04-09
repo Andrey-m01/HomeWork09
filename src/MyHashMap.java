@@ -5,7 +5,10 @@ public class MyHashMap {
         private Node start, end;
         private int size = 0;
 
-        public <V,K> void add(V value, K key) {
+        public MyLinkedListMap() {
+        }
+
+        public <K,V> void add(K key,V value) {
             Node node = new Node(value, key);
             if (size == 0) {
                 start = end = node;
@@ -19,27 +22,26 @@ public class MyHashMap {
 
         public <K> boolean remove(K key) {
             Node node = start;
-            int counter = 0;
+            int counter = 1;
             do {
-                if (key == node.key) {
+                if (key.equals(node.key)) {
                     if (counter == size) {
-                        node.next = null;
-                        end = node;
-                    } else if (counter == 0) {
-                        //node.next=node.next.next;
+                        end = node.previews;
+                        node.previews.next = null;
+                    } else if (counter == 1) {
                         start = node.next;
+                        start.previews=null;
                     } else {
-                        node.next = node.next.next;
+                        node.previews.next = node.next;
+                        node.next.previews=node.previews;
                     }
                     size--;
                     return true;
                 }
-
+                node = node.next;
                 counter++;
             } while (node.next!=null);
-
-
-
+            return false;
         } //удаляет элемент под индексом
 
         public void clear(){
@@ -51,23 +53,22 @@ public class MyHashMap {
             return size;
         } //возвращает размер коллекции
 
-        public Object get(int index){
+        public <K> Object get(K key){
             Node node = start;
-            if (index < size & index > -1) {
-                for (int i = 0; i < index; i++) {
-                    node = node.next;
+            do {
+                if (key.equals(node.key)) {
+                    return node.data;
                 }
-            }else {
-                throw new IndexOutOfBoundsException();
-            }
-            return node.data;
+                node = node.next;
+            } while (node.next!=null);
+            return false;
         } //возвращает элемент под индексом
 
         class Node {
             Object data, key;
             Node previews, next;
 
-            public <E,K> Node(E data, K key) {
+            public <K,E> Node(K key, E data) {
                 this.data = data;
                 this.key = key;
             }
@@ -75,12 +76,18 @@ public class MyHashMap {
     }
 
     MyLinkedListMap[] bucket = new MyLinkedListMap[8];
+    {
+        clear();
+//        for (int i = 0; i < bucket.length; i++) {
+//         bucket[i]=new MyLinkedListMap();
+//        }
+    }
 
-     public <V,K> void put(V value,K key){
+     public <V,K> void put(K key, V value){
          int hashKey = key.hashCode();
          for (int i = 0; i < steps.length; i++) {
              if (hashKey<=steps[i]) {
-                 bucket[i].add(value, key);
+                 bucket[i].add(key, value);
                  return;
              }
          }
@@ -97,9 +104,30 @@ public class MyHashMap {
             }
         }
     } //удаляет пару по ключу
-//        clear() очищает коллекцию
-//        size() возвращает размер коллекции
-//        get(Object key) возвращает значение(Object value) по ключу
+
+    public void clear(){
+        for (int i = 0; i < bucket.length; i++) {
+            bucket[i]=new MyLinkedListMap();
+        }
+    } //очищает коллекцию
+
+    public int size(){
+        int count = 0;
+        for (int i = 0; i < bucket.length; i++) {
+            count += bucket[i].size();
+        }
+        return count;
+    } //возвращает размер коллекции
+
+    public <E> Object get(E key){
+        int hashKey = key.hashCode();
+        for (int i = 0; i < steps.length; i++) {
+            if (hashKey<=steps[i]) {
+                return bucket[i].get(key);
+            }
+        }
+        return false;
+    } //возвращает значение(Object value) по ключу
 }
 
 
