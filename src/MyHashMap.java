@@ -1,6 +1,6 @@
 public class MyHashMap {
-    private int[] steps = {-1610612737, -1073741826, -536870915, -4, 536870907, 1073741818, 1610612729, 2147483647};
-    public class MyLinkedListMap {
+    private final int[] steps = {-1610612737, -1073741826, -536870915, -4, 536870907, 1073741818, 1610612729, 2147483647};
+    public static class MyLinkedListMap {
 
         private Node start, end;
         private int size = 0;
@@ -9,7 +9,7 @@ public class MyHashMap {
         }
 
         public <K,V> void add(K key,V value) {
-            Node node = new Node(value, key);
+            Node node = new Node(key, value);
             if (size == 0) {
                 start = end = node;
             } else {
@@ -18,7 +18,7 @@ public class MyHashMap {
                 end = node;
             }
             size++;
-        } //добавляет элемент в конец
+        }
 
         public <K> boolean remove(K key) {
             Node node = start;
@@ -42,29 +42,24 @@ public class MyHashMap {
                 counter++;
             } while (node.next!=null);
             return false;
-        } //удаляет элемент под индексом
-
-        public void clear(){
-            start = end = null;
-            size = 0;
-        } //очищает коллекцию
+        }
 
         public int size(){
             return size;
-        } //возвращает размер коллекции
+        }
 
         public <K> Object get(K key){
             Node node = start;
-            do {
+            while (node.next!=null) {
                 if (key.equals(node.key)) {
                     return node.data;
                 }
                 node = node.next;
-            } while (node.next!=null);
+            }
             return false;
-        } //возвращает элемент под индексом
+        }
 
-        class Node {
+        static class Node {
             Object data, key;
             Node previews, next;
 

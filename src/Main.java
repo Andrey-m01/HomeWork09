@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -83,11 +81,22 @@ public class Main {
         System.out.println(myStack.peek());
         System.out.println(myStack.pop());
 
+        System.out.println("\n  --myHashMap-- \n");
 
         MyHashMap myHashMap = new MyHashMap();
 
         myHashMap.put("kjndvkj","seprgj");
+        myHashMap.put("kj","sepj");
+        myHashMap.put( "kjn34kj","1212");
+        myHashMap.put("kjn3453kj","seprgj");
 
+        System.out.println(myHashMap.size() + "\n");
+
+        myHashMap.remove("kj");
+        System.out.println(myHashMap.get("kj"));
+
+
+        System.out.println(myHashMap.size() + "\n");
 
     }
 }
