@@ -93,7 +93,8 @@ public class Main {
         System.out.println(myHashMap.size() + "\n");
 
         myHashMap.remove("kj");
-        System.out.println(myHashMap.get("kj"));
+
+        System.out.println(myHashMap.get("kjn34kj"));
 
 
         System.out.println(myHashMap.size() + "\n");

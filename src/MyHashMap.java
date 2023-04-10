@@ -1,6 +1,6 @@
-public class MyHashMap <O>{
+public class MyHashMap <V,K>{
     private final int[] steps = {-1610612737, -1073741826, -536870915, -4, 536870907, 1073741818, 1610612729, 2147483647};
-    public static class MyLinkedListMap <T>{
+    public static class MyLinkedListMap <E,K>{
 
         private Node start, end;
         private int size = 0;
@@ -40,7 +40,7 @@ public class MyHashMap <O>{
                 }
                 node = node.next;
                 counter++;
-            } while (node.next!=null);
+            } while (node!=null);
             return false;
         }
 
@@ -48,24 +48,25 @@ public class MyHashMap <O>{
             return size;
         }
 
-        public <K> T get(K key){
+        public <K> E get(K key){
             Node node = start;
-            while (node.next!=null) {
+            while (node!=null) {
                 if (key.equals(node.key)) {
-                    return (T) node.data;
+                    return (E) node.data;
                 }
                 node = node.next;
             }
-            return (T) "";
+            return (E) "";
         }
 
-        static class Node <D>{
-            D data, key;
+        static class Node <K,E>{
+            E data;
+            K key;
             Node previews, next;
 
-            public <K,E> Node(K key, E data) {
-                this.data = (D) data;
-                this.key = (D) key;
+            public Node(K key, E data) {
+                this.data = data;
+                this.key = key;
             }
         }
     }
@@ -114,11 +115,11 @@ public class MyHashMap <O>{
         return count;
     } //возвращает размер коллекции
 
-    public <E> O get(E key){
+    public <K> V get(K key){
         int hashKey = key.hashCode();
         for (int i = 0; i < steps.length; i++) {
             if (hashKey<=steps[i]) {
-                return (O) bucket[i].get(key);
+                return (V) bucket[i].get(key);
             }
         }
         return null;
