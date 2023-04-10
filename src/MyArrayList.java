@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
-public class MyArrayList {
-private Object[] data = new Object[0];
+public class MyArrayList <L> {
+private L[] data = (L[]) new Object[0];
 
 
     @Override
@@ -9,36 +9,36 @@ private Object[] data = new Object[0];
         return  Arrays.toString(data);
     }
 
-    public void add(Object value){
-        Object[] tData = new Object[data.length+1];
+    public <V> void add(V value){
+        V[] tData = (V[]) new Object[data.length+1];
         for (int i =0;i< data.length;i++) {
-            tData[i] = data[i];
+            tData[i] = (V) data[i];
         }
         tData[tData.length-1]=value;
-        data=tData;
+        data= (L[]) tData;
     } //добавляет элемент в конец
 
-    public void remove(int index){
-        Object[] tData = new Object[data.length-1];
+    public <V> void remove(int index){
+        V[] tData = (V[]) new Object[data.length-1];
         int j = 0;
         for (int i =0;i<data.length;i++) {
             if(i!=index) {
-                tData[j] = data[i];
+                tData[j] = (V) data[i];
                 j++;
             }
         }
-        data=tData;
+        data= (L[]) tData;
     } //удаляет элемент под индексом
 
     public void clear(){
-        data = new Object[0];
+        data = (L[]) new Object[0];
     } //очищает коллекцию
 
     public int size(){
         return data.length;
     } //возвращает размер коллекции
 
-    public Object get(int index){
+    public L get(int index){
         return data[index];
     }
 

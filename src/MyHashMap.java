@@ -1,6 +1,6 @@
-public class MyHashMap {
+public class MyHashMap <O>{
     private final int[] steps = {-1610612737, -1073741826, -536870915, -4, 536870907, 1073741818, 1610612729, 2147483647};
-    public static class MyLinkedListMap {
+    public static class MyLinkedListMap <T>{
 
         private Node start, end;
         private int size = 0;
@@ -48,24 +48,24 @@ public class MyHashMap {
             return size;
         }
 
-        public <K> Object get(K key){
+        public <K> T get(K key){
             Node node = start;
             while (node.next!=null) {
                 if (key.equals(node.key)) {
-                    return node.data;
+                    return (T) node.data;
                 }
                 node = node.next;
             }
-            return false;
+            return (T) "";
         }
 
-        static class Node {
-            Object data, key;
+        static class Node <D>{
+            D data, key;
             Node previews, next;
 
             public <K,E> Node(K key, E data) {
-                this.data = data;
-                this.key = key;
+                this.data = (D) data;
+                this.key = (D) key;
             }
         }
     }
@@ -114,14 +114,14 @@ public class MyHashMap {
         return count;
     } //возвращает размер коллекции
 
-    public <E> Object get(E key){
+    public <E> O get(E key){
         int hashKey = key.hashCode();
         for (int i = 0; i < steps.length; i++) {
             if (hashKey<=steps[i]) {
-                return bucket[i].get(key);
+                return (O) bucket[i].get(key);
             }
         }
-        return false;
+        return null;
     } //возвращает значение(Object value) по ключу
 }
 

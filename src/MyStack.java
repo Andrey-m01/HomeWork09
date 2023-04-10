@@ -1,11 +1,11 @@
-public class MyStack {
+public class MyStack <T>{
     private Node start, end;
     private int size = 0;
-    class Node {
-        Object data;
+    class Node <D>{
+        D data;
         Node previews, next;
         public <E> Node(E data) {
-            this.data = data;
+            this.data = (D) data;
         }
     }
 
@@ -50,19 +50,19 @@ public class MyStack {
         return size;
     } //возвращает размер коллекции
 
-    public Object peek(){
+    public T peek(){
         if (size>0){
-            return end.data;
+            return (T) end.data;
         }
         return null;
     } //возвращает первый элемент в стеке (LIFO)
 
-     public Object pop(){
+     public T pop(){
          if (size>0){
              Node node = end;
              end=end.previews;
              size--;
-             return node.data;
+             return (T) node.data;
          }
          return null;
      } //возвращает первый элемент в стеке и удаляет его из коллекции

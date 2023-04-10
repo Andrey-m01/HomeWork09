@@ -1,4 +1,4 @@
-public class MyLinkedList {
+public class MyLinkedList <T>{
 
     private Node start, end;
     private int size = 0;
@@ -48,7 +48,7 @@ public class MyLinkedList {
             return size;
         } //возвращает размер коллекции
 
-        public <E> Object get(int index){
+        public T get(int index){
             Node node = start;
             if (index < size & index > -1) {
                 for (int i = 0; i < index; i++) {
@@ -57,15 +57,15 @@ public class MyLinkedList {
             }else {
                 throw new IndexOutOfBoundsException();
             }
-            return node.data;
+            return (T) node.data;
         } //возвращает элемент под индексом
 
 
-    class Node {
-        Object data;
+    class Node <D>{
+        D data;
         Node next;
         public <E> Node(E data) {
-            this.data = data;
+            this.data = (D) data;
         }
     }
 

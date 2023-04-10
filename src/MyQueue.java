@@ -1,11 +1,11 @@
-public class MyQueue {
+public class MyQueue <T> {
     private Node start, end;
     private int size = 0;
-    class Node {
-        Object data;
+    class Node <D>{
+        D data;
         Node next;
         public <E> Node(E data) {
-            this.data = data;
+            this.data = (D) data;
         }
     }
 
@@ -30,19 +30,19 @@ public class MyQueue {
         return size;
     } //возвращает размер коллекции
 
-    public Object peek(){
+    public T peek(){
         if (size>0){
-            return start.data;
+            return (T) start.data;
         }
         return null;
     } //возвращает первый элемент в очереди (FIFO)
 
-    public Object poll(){
+    public T poll(){
         if (size>0){
             Node node = start;
             start=start.next;
             size--;
-            return node.data;
+            return (T) node.data;
         }
         return null;
     } //возвращает первый элемент в очереди и удаляет его из коллекции
